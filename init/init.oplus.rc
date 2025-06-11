@@ -60,6 +60,9 @@ on property:ro.boot.prjname=*
     # Display
     setprop ro.separate.soft ${ro.boot.prjname}
 
+on property:ro.boot.prjname=22825
+    setprop persist.vendor.display.pxlw.iris_feature 0x417f0780
+
 on property:sys.boot_completed=1
     # Display
     copy /vendor/etc/oem_51_prj_OppoLTM8650_1689712162019.pfm /mnt/vendor/persist/data/pfm/licenses/oem_51_prj_OppoLTM8650_1689712162019.pfm
