@@ -13,7 +13,8 @@
 
 #define NV_ID_US "161"
 #define NV_ID_IN "27"
-#define NV_ID_EU "68"
+#define NV_ID_EU1 "68"
+#define NV_ID_EU2 "167"
 #define NV_ID_CN "151"
 
 using android::base::GetProperty;
@@ -57,7 +58,7 @@ void vendor_load_properties() {
 
     if (hw_region_id == NV_ID_CN) {
         OverrideProperty("ro.boot.hardware.revision", "CN");
-    } else if (hw_region_id == NV_ID_EU) {
+    } else if ((hw_region_id == NV_ID_EU1) || (hw_region_id == NV_ID_EU2)) {
         OverrideProperty("ro.boot.hardware.revision", "EU");
     } else if (hw_region_id == NV_ID_IN) {
         OverrideProperty("ro.boot.hardware.revision", "IN");
@@ -77,6 +78,15 @@ void vendor_load_properties() {
             OverrideProperty("ro.product.product.model",
                     hw_region_id == NV_ID_IN ? "CPH2573" :
                     hw_region_id == NV_ID_US ? "CPH2583" : "CPH2581");
+            break;
+        case 23851:  // giulia CN
+            OverrideProperty("ro.product.device", "OP5D2BL1");
+            OverrideProperty("ro.product.vendor.device", "OP5D2BL1");
+            OverrideProperty("ro.product.product.model", "PKG110");
+            break;
+        case 23867:  // giulia ROW
+            OverrideProperty("ro.product.product.model",
+                    hw_region_id == NV_ID_IN ? "CPH2691" : "CPH2645");
             break;
         default:
             LOG(ERROR) << "Unexpected prjname: " << prjname;
